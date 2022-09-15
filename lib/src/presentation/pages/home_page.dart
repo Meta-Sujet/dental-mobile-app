@@ -3,7 +3,9 @@ import 'package:dental_mobile_app/src/presentation/navigation/routes/router.gr.d
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage(this.lastName, {Key? key}) : super(key: key);
+
+  final String lastName;
 
   @override
   State<HomePage> createState() => _HomePageState();

@@ -7,6 +7,7 @@ part 'authentification_payload.g.dart';
 class AuthentificationPayload with _$AuthentificationPayload {
   factory AuthentificationPayload({
     required String accessToken,
+    required Map<String, Object?> user,
   }) = _AuthentificationPayload;
 
   factory AuthentificationPayload.fromJson(Map<String, dynamic> json) =>

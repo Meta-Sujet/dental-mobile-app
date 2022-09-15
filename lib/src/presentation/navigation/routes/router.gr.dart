@@ -55,8 +55,10 @@ class AppRouter extends _i12.RootStackRouter {
           routeData: routeData, child: const _i4.NewPasswordPage());
     },
     HomePageRouter.name: (routeData) {
+      final args = routeData.argsAs<HomePageRouterArgs>();
       return _i12.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i5.HomePage());
+          routeData: routeData,
+          child: _i5.HomePage(args.lastName, key: args.key));
     },
     CreateEditPost.name: (routeData) {
       final args = routeData.argsAs<CreateEditPostArgs>(
@@ -164,12 +166,30 @@ class NewPasswordRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.HomePage]
-class HomePageRouter extends _i12.PageRouteInfo<void> {
-  const HomePageRouter({List<_i12.PageRouteInfo>? children})
+class HomePageRouter extends _i12.PageRouteInfo<HomePageRouterArgs> {
+  HomePageRouter(
+      {required String lastName,
+      _i13.Key? key,
+      List<_i12.PageRouteInfo>? children})
       : super(HomePageRouter.name,
-            path: '/home_page', initialChildren: children);
+            path: '/home_page',
+            args: HomePageRouterArgs(lastName: lastName, key: key),
+            initialChildren: children);
 
   static const String name = 'HomePageRouter';
+}
+
+class HomePageRouterArgs {
+  const HomePageRouterArgs({required this.lastName, this.key});
+
+  final String lastName;
+
+  final _i13.Key? key;
+
+  @override
+  String toString() {
+    return 'HomePageRouterArgs{lastName: $lastName, key: $key}';
+  }
 }
 
 /// generated route for

@@ -22,6 +22,7 @@ AuthentificationPayload _$AuthentificationPayloadFromJson(
 /// @nodoc
 mixin _$AuthentificationPayload {
   String get accessToken => throw _privateConstructorUsedError;
+  Map<String, Object?> get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $AuthentificationPayloadCopyWith<$Res> {
   factory $AuthentificationPayloadCopyWith(AuthentificationPayload value,
           $Res Function(AuthentificationPayload) then) =
       _$AuthentificationPayloadCopyWithImpl<$Res>;
-  $Res call({String accessToken});
+  $Res call({String accessToken, Map<String, Object?> user});
 }
 
 /// @nodoc
@@ -49,12 +50,17 @@ class _$AuthentificationPayloadCopyWithImpl<$Res>
   @override
   $Res call({
     Object? accessToken = freezed,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       accessToken: accessToken == freezed
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as Map<String, Object?>,
     ));
   }
 }
@@ -66,7 +72,7 @@ abstract class _$$_AuthentificationPayloadCopyWith<$Res>
           $Res Function(_$_AuthentificationPayload) then) =
       __$$_AuthentificationPayloadCopyWithImpl<$Res>;
   @override
-  $Res call({String accessToken});
+  $Res call({String accessToken, Map<String, Object?> user});
 }
 
 /// @nodoc
@@ -84,12 +90,17 @@ class __$$_AuthentificationPayloadCopyWithImpl<$Res>
   @override
   $Res call({
     Object? accessToken = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$_AuthentificationPayload(
       accessToken: accessToken == freezed
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String,
+      user: user == freezed
+          ? _value._user
+          : user // ignore: cast_nullable_to_non_nullable
+              as Map<String, Object?>,
     ));
   }
 }
@@ -97,17 +108,25 @@ class __$$_AuthentificationPayloadCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_AuthentificationPayload implements _AuthentificationPayload {
-  _$_AuthentificationPayload({required this.accessToken});
+  _$_AuthentificationPayload(
+      {required this.accessToken, required final Map<String, Object?> user})
+      : _user = user;
 
   factory _$_AuthentificationPayload.fromJson(Map<String, dynamic> json) =>
       _$$_AuthentificationPayloadFromJson(json);
 
   @override
   final String accessToken;
+  final Map<String, Object?> _user;
+  @override
+  Map<String, Object?> get user {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_user);
+  }
 
   @override
   String toString() {
-    return 'AuthentificationPayload(accessToken: $accessToken)';
+    return 'AuthentificationPayload(accessToken: $accessToken, user: $user)';
   }
 
   @override
@@ -116,13 +135,16 @@ class _$_AuthentificationPayload implements _AuthentificationPayload {
         (other.runtimeType == runtimeType &&
             other is _$_AuthentificationPayload &&
             const DeepCollectionEquality()
-                .equals(other.accessToken, accessToken));
+                .equals(other.accessToken, accessToken) &&
+            const DeepCollectionEquality().equals(other._user, _user));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(accessToken));
+      runtimeType,
+      const DeepCollectionEquality().hash(accessToken),
+      const DeepCollectionEquality().hash(_user));
 
   @JsonKey(ignore: true)
   @override
@@ -140,14 +162,17 @@ class _$_AuthentificationPayload implements _AuthentificationPayload {
 }
 
 abstract class _AuthentificationPayload implements AuthentificationPayload {
-  factory _AuthentificationPayload({required final String accessToken}) =
-      _$_AuthentificationPayload;
+  factory _AuthentificationPayload(
+      {required final String accessToken,
+      required final Map<String, Object?> user}) = _$_AuthentificationPayload;
 
   factory _AuthentificationPayload.fromJson(Map<String, dynamic> json) =
       _$_AuthentificationPayload.fromJson;
 
   @override
   String get accessToken;
+  @override
+  Map<String, Object?> get user;
   @override
   @JsonKey(ignore: true)
   _$$_AuthentificationPayloadCopyWith<_$_AuthentificationPayload>

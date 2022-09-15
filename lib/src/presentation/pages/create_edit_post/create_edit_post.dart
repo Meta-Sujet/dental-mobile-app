@@ -80,7 +80,7 @@ class _CreateEditPostState extends State<CreateEditPost> {
               padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 30),
               child: TextButton(
                 onPressed: () {
-                  if (_cont.text.isNotEmpty) {
+                  if (_cont.text.isNotEmpty && indx != null) {
                     if (widget.post == null) {
                       BlocProvider.of<PostCubit>(context).addPost(
                         Post(
