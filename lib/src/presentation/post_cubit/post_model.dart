@@ -16,6 +16,7 @@ class Post with _$Post {
     @Default(false) bool isLiked,
     @Default(<String>[]) List<String> comments,
     @Default(false) bool isFavorite,
+    @Default('') String id,
   }) = _Post;
 }
 

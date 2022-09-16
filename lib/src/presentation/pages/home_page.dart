@@ -42,103 +42,175 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // var userData = User.fromJson(widget.user);
+    // print(userData);
     // var userData = getIt<UserCubit>().state;
     // print('hey: $userData');
+    var userData = getIt<UserCubit>().state;
     return AutoTabsScaffold(
       appBarBuilder: (context, tabsRouter) {
-        return AppBar(
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed('user_profile');
-                },
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: const BoxDecoration(shape: BoxShape.circle),
-                  clipBehavior: Clip.hardEdge,
-                  child: Image.network(
-                      'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MXx8fGVufDB8fHx8&w=1000&q=80'),
-                ),
+        print(tabsRouter.currentChild!.name);
+
+        if (tabsRouter.currentChild!.name == 'UserProfileRouter') {
+          return PreferredSize(
+            preferredSize: Size.fromHeight(190),
+            child: Container(
+              height: 197,
+              color: const Color(0xFF4AC1E0),
+              padding: const EdgeInsets.only(top: 60),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        width: 35,
+                        child: IconButton(
+                          onPressed: () {
+                            tabsRouter.setActiveIndex(0);
+                            _onItemTapped(0);
+                          },
+                          icon: const Icon(
+                            Icons.keyboard_arrow_left,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 85,
+                        width: 85,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 3,
+                          ),
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        clipBehavior: Clip.hardEdge,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: Image.network(
+                              'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MXx8fGVufDB8fHx8&w=1000&q=80'),
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      Text(
+                        '${userData.firstName} ${userData.lastName}',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 35),
+                ],
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: SizedBox(
-                  height: 36,
-                  child: TextField(
-                    textAlignVertical: TextAlignVertical.center,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.zero,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(100),
-                        borderSide: const BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
+            ),
+          );
+        } else {
+          return AppBar(
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    // context.navigateTo(UserProfileRouter());
+                    tabsRouter.setActiveIndex(3);
+                    _onItemTapped(3);
+                  },
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    clipBehavior: Clip.hardEdge,
+                    child: Image.network(
+                        'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MXx8fGVufDB8fHx8&w=1000&q=80'),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: SizedBox(
+                    height: 36,
+                    child: TextField(
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.zero,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                          borderSide: const BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
+                          ),
                         ),
-                      ),
-                      prefixIcon: IconButton(
-                        onPressed: () => {},
-                        icon: const Icon(Icons.search),
-                        color: const Color(0xFFADB5BD),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(100),
-                        borderSide: const BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
+                        prefixIcon: IconButton(
+                          onPressed: () => {},
+                          icon: const Icon(Icons.search),
+                          color: const Color(0xFFADB5BD),
                         ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                          borderSide: const BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
+                          ),
+                        ),
+                        filled: true,
+                        hintText: 'Search',
                       ),
-                      filled: true,
-                      hintText: 'Search',
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 10),
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
+                const SizedBox(width: 10),
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: const Color.fromRGBO(53, 162, 255, 0.15)),
+                  child: IconButton(
+                    onPressed: () {
+                      // Navigator.of(context).pushNamed(Routes.chat);
+                    },
+                    icon: const Icon(Icons.message),
+                    color: const Color(0xFF4AC1E0),
+                    highlightColor: Colors.grey.shade200,
+                    splashColor: Colors.transparent,
+                    splashRadius: 18,
+                    iconSize: 15,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: const Color.fromRGBO(53, 162, 255, 0.15)),
-                child: IconButton(
-                  onPressed: () {
-                    // Navigator.of(context).pushNamed(Routes.chat);
-                  },
-                  icon: const Icon(Icons.message),
-                  color: const Color(0xFF4AC1E0),
-                  highlightColor: Colors.grey.shade200,
-                  splashColor: Colors.transparent,
-                  splashRadius: 18,
-                  iconSize: 15,
+                    color: const Color.fromRGBO(245, 107, 33, 0.15),
+                  ),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.notifications),
+                    color: const Color(0xFFFFB800),
+                    highlightColor: Colors.grey.shade200,
+                    splashColor: Colors.transparent,
+                    splashRadius: 18,
+                    iconSize: 15,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: const Color.fromRGBO(245, 107, 33, 0.15),
-                ),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.notifications),
-                  color: const Color(0xFFFFB800),
-                  highlightColor: Colors.grey.shade200,
-                  splashColor: Colors.transparent,
-                  splashRadius: 18,
-                  iconSize: 15,
-                ),
-              ),
-            ],
-          ),
-          elevation: 0,
-          backgroundColor: Colors.white,
-        );
+              ],
+            ),
+            elevation: 0,
+            backgroundColor: Colors.white,
+          );
+        }
       },
       routes: const [
         NewsFeedRouter(),

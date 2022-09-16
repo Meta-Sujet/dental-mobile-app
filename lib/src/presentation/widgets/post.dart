@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../di/injection_config.dart';
+import '../model/common/user.dart';
 import '../post_cubit/post_cubit.dart';
 import '../post_cubit/post_model.dart';
 
@@ -31,6 +33,8 @@ class _PostWidgetState extends State<PostWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var userData = getIt<UserCubit>().state;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.only(bottom: 12),
@@ -59,7 +63,7 @@ class _PostWidgetState extends State<PostWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${widget.postModel!.firstName} ${widget.postModel!.lastName}',
+                        '${userData.firstName} ${userData.lastName}',
                       ),
                       Text(
                         '${DateTime.now().minute - widget.postModel!.postDate.minute} minutes ago',

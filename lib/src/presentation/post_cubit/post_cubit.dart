@@ -47,7 +47,14 @@ class PostCubit extends Cubit<List<Post>> {
 
     final posts = List.of(state);
     posts.removeAt(index);
+
     posts.insert(index, post.copyWith(isLiked: !post.isLiked));
+
+    // if (!state[index].isLiked) {
+    //   print('liked');
+    // } else {
+    //   print('unliked');
+    // }
 
     // log(posts.toString());
     emit(posts);

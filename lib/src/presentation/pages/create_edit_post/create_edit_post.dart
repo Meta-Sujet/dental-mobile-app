@@ -3,6 +3,8 @@ import 'package:dental_mobile_app/src/presentation/widgets/post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../di/injection_config.dart';
+import '../../model/common/user.dart';
 import '../../post_cubit/post_cubit.dart';
 import '../../post_cubit/post_model.dart';
 
@@ -56,6 +58,8 @@ class _CreateEditPostState extends State<CreateEditPost> {
   @override
   Widget build(BuildContext context) {
     final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    var userData = getIt<UserCubit>().state;
+
     print(keyboardHeight);
     return Scaffold(
         appBar: AppBar(
@@ -146,8 +150,8 @@ class _CreateEditPostState extends State<CreateEditPost> {
                           'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MXx8fGVufDB8fHx8&w=1000&q=80'),
                     ),
                     const SizedBox(width: 8),
-                    const Text(
-                      'Mamuka Jgenti',
+                    Text(
+                      '${userData.firstName} ${userData.lastName}',
                     ),
                   ],
                 ),

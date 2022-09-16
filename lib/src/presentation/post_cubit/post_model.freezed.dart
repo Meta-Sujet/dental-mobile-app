@@ -26,6 +26,7 @@ mixin _$Post {
   bool get isLiked => throw _privateConstructorUsedError;
   List<String> get comments => throw _privateConstructorUsedError;
   bool get isFavorite => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
@@ -45,7 +46,8 @@ abstract class $PostCopyWith<$Res> {
       int likes,
       bool isLiked,
       List<String> comments,
-      bool isFavorite});
+      bool isFavorite,
+      String id});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
     Object? isLiked = freezed,
     Object? comments = freezed,
     Object? isFavorite = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       firstName: firstName == freezed
@@ -110,6 +113,10 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -129,7 +136,8 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       int likes,
       bool isLiked,
       List<String> comments,
-      bool isFavorite});
+      bool isFavorite,
+      String id});
 }
 
 /// @nodoc
@@ -153,6 +161,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
     Object? isLiked = freezed,
     Object? comments = freezed,
     Object? isFavorite = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$_Post(
       firstName: firstName == freezed
@@ -195,6 +204,10 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -213,7 +226,8 @@ class _$_Post implements _Post {
       this.likes = 0,
       this.isLiked = false,
       final List<String> comments = const <String>[],
-      this.isFavorite = false})
+      this.isFavorite = false,
+      this.id = ''})
       : _comments = comments;
 
   @override
@@ -249,10 +263,13 @@ class _$_Post implements _Post {
   @override
   @JsonKey()
   final bool isFavorite;
+  @override
+  @JsonKey()
+  final String id;
 
   @override
   String toString() {
-    return 'Post(firstName: $firstName, lastName: $lastName, imageUrl: $imageUrl, postDate: $postDate, postText: $postText, category: $category, likes: $likes, isLiked: $isLiked, comments: $comments, isFavorite: $isFavorite)';
+    return 'Post(firstName: $firstName, lastName: $lastName, imageUrl: $imageUrl, postDate: $postDate, postText: $postText, category: $category, likes: $likes, isLiked: $isLiked, comments: $comments, isFavorite: $isFavorite, id: $id)';
   }
 
   @override
@@ -270,7 +287,8 @@ class _$_Post implements _Post {
             const DeepCollectionEquality().equals(other.isLiked, isLiked) &&
             const DeepCollectionEquality().equals(other._comments, _comments) &&
             const DeepCollectionEquality()
-                .equals(other.isFavorite, isFavorite));
+                .equals(other.isFavorite, isFavorite) &&
+            const DeepCollectionEquality().equals(other.id, id));
   }
 
   @override
@@ -285,7 +303,8 @@ class _$_Post implements _Post {
       const DeepCollectionEquality().hash(likes),
       const DeepCollectionEquality().hash(isLiked),
       const DeepCollectionEquality().hash(_comments),
-      const DeepCollectionEquality().hash(isFavorite));
+      const DeepCollectionEquality().hash(isFavorite),
+      const DeepCollectionEquality().hash(id));
 
   @JsonKey(ignore: true)
   @override
@@ -304,7 +323,8 @@ abstract class _Post implements Post {
       final int likes,
       final bool isLiked,
       final List<String> comments,
-      final bool isFavorite}) = _$_Post;
+      final bool isFavorite,
+      final String id}) = _$_Post;
 
   @override
   String get firstName;
@@ -326,6 +346,8 @@ abstract class _Post implements Post {
   List<String> get comments;
   @override
   bool get isFavorite;
+  @override
+  String get id;
   @override
   @JsonKey(ignore: true)
   _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;
