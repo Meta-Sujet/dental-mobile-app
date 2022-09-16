@@ -107,10 +107,11 @@ class _PostWidgetState extends State<PostWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     TextButton.icon(
-                                      onPressed: () {
-                                        BlocProvider.of<PostCubit>(context)
-                                            .onDeletePressed(widget.postModel!);
-                                        context.router.pop();
+                                      onPressed: () async {
+                                        await context.router.pop();
+
+                                        showDialogFunc(
+                                            context, widget.postModel!);
                                       },
                                       icon: Container(
                                         decoration: BoxDecoration(
@@ -288,4 +289,72 @@ class _PostWidgetState extends State<PostWidget> {
       ),
     );
   }
+}
+
+Future<T?> showDialogFunc<T>(BuildContext context, Post post) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        content: Container(
+          height: 250,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              children: [
+                Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                  size: 50,
+                ),
+                SizedBox(height: 30),
+                Text(
+                  'Are you sure you want to\ndelete post?',
+                  textAlign: TextAlign.center,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Color(0xFF4AC1E0).withOpacity(0.20)),
+                        onPressed: () {
+                          context.router.pop(false);
+                        },
+                        child: Text(
+                          'No',
+                          style: TextStyle(
+                            color: Color(0xFF4AC1E0),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          context.router.pop(true);
+                        },
+                        child: Text('Yes'),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  ).then((value) {
+    if (value) {
+      BlocProvider.of<PostCubit>(context).onDeletePressed(post);
+      context.router.pop();
+    } else {
+      context.router.pop();
+    }
+  });
 }

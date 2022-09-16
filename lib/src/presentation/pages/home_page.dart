@@ -2,10 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dental_mobile_app/src/presentation/navigation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage(this.lastName, {Key? key}) : super(key: key);
+import '../../di/injection_config.dart';
+import '../model/common/user.dart';
 
-  final String lastName;
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  // final Map<String, Object?> user;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -39,6 +42,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // var userData = getIt<UserCubit>().state;
+    // print('hey: $userData');
     return AutoTabsScaffold(
       appBarBuilder: (context, tabsRouter) {
         return AppBar(

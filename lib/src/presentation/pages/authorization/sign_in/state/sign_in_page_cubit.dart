@@ -1,3 +1,4 @@
+import 'package:dental_mobile_app/src/presentation/model/common/user.dart';
 import 'package:dental_mobile_app/src/presentation/navigation/routes/router.gr.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -57,9 +58,14 @@ class SignInPageCubit extends Cubit<SignInPageState> {
       // await const FlutterSecureStorage()
       //     .write(key: 'accessToken', value: result.accessToken);
 
-      getIt<AppRouter>().pushAndPopUntil(
-          HomePageRouter(lastName: result.user['lastName'] as String),
-          predicate: (route) => false);
+      // getIt<AppRouter>().pushAndPopUntil(
+      //     HomePageRouter(lastName: result.user['lastName'] as String),
+      //     predicate: (route) => false);
+
+      getIt<UserCubit>().addUser(result.user);
+
+      getIt<AppRouter>()
+          .pushAndPopUntil(HomePageRouter(), predicate: (route) => false);
 
       // შექმენი User-ის მოდელი რომელიც ემთხვევა რესპონსს,რაც მოდის სერვერიდან
       // შექმენი კუბიტი და აქ მიღებული იუზერის მონაცემები ატვირთე ამ კუბიტში

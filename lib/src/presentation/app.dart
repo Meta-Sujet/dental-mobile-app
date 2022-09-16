@@ -1,3 +1,4 @@
+import 'package:dental_mobile_app/src/presentation/model/common/user.dart';
 import 'package:dental_mobile_app/src/presentation/navigation/routes/router.dart';
 import 'package:dental_mobile_app/src/presentation/post_cubit/post_cubit.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final router = getIt<AppRouter>();
 
-    return BlocProvider<PostCubit>(
-      create: (context) => PostCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<PostCubit>(
+          create: (context) => PostCubit(),
+        ),
+        BlocProvider<UserCubit>(
+          create: (context) => UserCubit(),
+        ),
+      ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
