@@ -299,14 +299,20 @@ Future<T?> showDialogFunc<T>(BuildContext context, Post post) {
   return showDialog(
     context: context,
     builder: (context) {
-      return AlertDialog(
-        content: Container(
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8),
+          ),
+        ),
+        insetPadding: EdgeInsets.all(20),
+        child: Container(
           height: 250,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(18.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
             child: Column(
               children: [
                 Icon(
@@ -319,6 +325,7 @@ Future<T?> showDialogFunc<T>(BuildContext context, Post post) {
                   'Are you sure you want to\ndelete post?',
                   textAlign: TextAlign.center,
                 ),
+                SizedBox(height: 30),
                 Row(
                   children: [
                     Expanded(

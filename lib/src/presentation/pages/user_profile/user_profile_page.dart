@@ -1,10 +1,14 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dental_mobile_app/src/presentation/model/common/internet_connection_cubit/internet_connection_cubit.dart';
 import 'package:dental_mobile_app/src/presentation/post_cubit/post_cubit.dart';
 import 'package:dental_mobile_app/src/presentation/widgets/post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
 import '../../../di/injection_config.dart';
 import '../../model/common/user.dart';
+import '../../navigation/routes/router.gr.dart';
 import '../../post_cubit/post_model.dart';
 
 class UserProfilePage extends StatelessWidget {
@@ -159,23 +163,71 @@ class ProfileTab extends StatelessWidget {
   }
 }
 
-class PostsTab extends StatelessWidget {
+class PostsTab extends StatefulWidget {
   const PostsTab({Key? key}) : super(key: key);
 
+  @override
+  State<PostsTab> createState() => _PostsTabState();
+}
+
+class _PostsTabState extends State<PostsTab> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
       child: BlocBuilder<PostCubit, List<Post>>(
         builder: (context, state) {
-          return ListView.builder(
-            itemCount: state.length,
-            itemBuilder: (context, index) {
-              return PostWidget(
-                postModel: state[index],
-              );
-            },
-          );
+          if (state.isEmpty) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.hourglass_empty,
+                      color: Color(0xFF4AC1E0),
+                      size: 80,
+                    ),
+                    SizedBox(height: 40),
+                    Text(
+                      'Empty Sheet',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    SizedBox(height: 15),
+                    Text(
+                      'Click on the button create \na new Sheet',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 50),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              context.router.push(CreateEditPost());
+                            },
+                            child: Text('Create'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return ListView.builder(
+              itemCount: state.length,
+              itemBuilder: (context, index) {
+                return PostWidget(
+                  postModel: state[index],
+                );
+              },
+            );
+          }
         },
       ),
     );

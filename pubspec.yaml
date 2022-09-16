@@ -25,6 +25,8 @@ dependencies:
   logger: ^1.1.0
   lint: ^1.8.2
   json_serializable: ^6.3.1
+  connectivity_plus: ^2.3.7
+  internet_connection_checker: ^0.0.1+4
 
 dev_dependencies:
   flutter_test:
